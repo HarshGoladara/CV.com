@@ -1,6 +1,7 @@
 import JWT from "jsonwebtoken";
 import { hashPassword,comparePassword,validPassword } from "../helper/authhelper.js";
 import userModel from "../models/userModel.js";
+import userResumeListModel from "../models/userResumeListModel.js";
 
 export const registerController = async(req,res)=>{
     try {
@@ -43,6 +44,7 @@ export const registerController = async(req,res)=>{
         const hasedpassword = await hashPassword(password);
 
         const user = await new userModel({firstName,lastName,email,profilePhoto,password:hasedpassword}).save();
+        await new userResumeListModel({email}).save();
 
         return res.status(200).send({
             succsess:true,
@@ -68,7 +70,7 @@ export const loginController = async(req,res)=>{
         const user = await userModel.findOne({email});
 
         if(!user){
-            return res.status(404).send({
+            return res.status(200).send({
                 success : false,
                 message : 'User Not Found'
             })
@@ -87,8 +89,12 @@ export const loginController = async(req,res)=>{
 
         user.token = user.token.concat({token:token});
         await user.save();
-        res.cookie("jwt",token);
-        return res.status(200).send({
+        res.cookie("jwt",token,
+            {
+                expires : new Date(Date.now() + 500000)
+            }
+        );
+        return res.status(202).send({
             success:true,
             message:'Valid user',
             token : token
