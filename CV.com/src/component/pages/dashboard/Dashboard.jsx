@@ -36,6 +36,7 @@ function Dashboard() {
   },[]);
 
   useEffect(() => {
+    console.log('hii');
     if(resumeList.length!==0){
       setDataLoaded(true);
     }
@@ -62,9 +63,9 @@ function Dashboard() {
       <div className='p-10 md:px-20 flex justify-center md:justify-start flex-wrap'>
         <AddResume/>
         {/* <ResumeNameCard name='Hasrh_resume'/> */}
-        {dataLoaded && resumeList.map((key,index)=>{
-          // console.log(key);
-          return <ResumeNameCard name={key} key={index}/>
+        {dataLoaded && resumeList && resumeList.map((key,index)=>{
+          // console.log(resumeList);
+          return <ResumeNameCard name={key} key={index} resumeList={resumeList} setResumeList={setResumeList}/>
         })}
       </div>
     </div>

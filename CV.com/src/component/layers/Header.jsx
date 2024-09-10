@@ -33,6 +33,7 @@ function Header() {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const isLogin = cookies.email ? true : false;
     const [image, setImage] = useState(null);
+
     let fisrtLetter = 'A';
      if(isLogin){
         fisrtLetter=cookies.email[0];
@@ -45,6 +46,7 @@ function Header() {
         .then((img) => setImage(img.default))
         .catch((err) => console.error(err));
     }, []);
+
     
 
     const routeToSignIn = () =>{
@@ -76,14 +78,14 @@ function Header() {
     };
 
     const buildResumeButtonMenuList = {
-        'Build your resume' : '#',
+        'Build your resume' : '/dashboard',
         'Sample resume' : '##'
-    }
+    };
 
     const avtarMenuList = {
         'Profile' : '#',
         'Logout' : '/logout'
-    }
+    };
 
   return (
     <>

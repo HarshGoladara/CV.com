@@ -62,3 +62,47 @@ export const upadateResumeDetails = async(req,res)=>{
         console.log(error);
     }
 }
+
+export const renameResume = async(req,res)=>{
+    try {
+        const {email,resumeId,newName} = req.body;
+        const user= await userResumeListModel.findOne({email});
+        for(let i=0;i<user.resumes.length;i++){
+            if(user.resumes[i].resumeId === resumeId){
+                user.resumes[i].resumeName = newName;
+                break;
+            }
+        }
+        await userResumeListModel.updateOne(
+            {email:email},
+            {$set : {resumes : user.resumes}}
+        )
+        res.send('sucess');
+    } catch (error) {
+        
+    }
+}
+
+export const deleteResume = async(req,res)=>{
+    try {
+        const {email,resumeId} = req.body;
+        const user = await userResumeListModel.findOne({email});
+        let resumelist = user.resumes;
+        let ind;
+        for(let i=0;i<resumelist.length;i++){
+            if(resumelist[i].resumeId===resumeId){
+                ind = i ;
+                break;
+            }
+        }
+            resumelist.splice(ind,1);
+        await userResumeListModel.updateOne(
+            {email:email},
+            {$set : {resumes : resumelist}}
+        );
+        await resumeModel.deleteOne({resumeId:resumeId});
+        res.status(200).send('sucess');
+    } catch (error) {
+        
+    }
+}

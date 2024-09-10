@@ -44,7 +44,7 @@ function AddResume() {
                 email:cookies.email
             });
             setLoader(false);
-            console.log(res);
+            // console.log(res);
             setOpenDialog(false);
             navigate(`/dashboard/resume/${uuid}/edit`)
             setResumeTitle('');

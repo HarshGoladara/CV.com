@@ -71,6 +71,7 @@ function SignIn() {
 
   const handleLoginWithGoogle = async()=>{
     try {
+      setloading(true);
       const result = await signInWithPopup(auth,provider);
       // console.log(result)
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -95,6 +96,7 @@ function SignIn() {
        
         setCookie('token', res.data.token, { path: '/' ,expires : new Date(Date.now()+28800000)});
         setCookie('email',result.user.email,{ path: '/' ,expires : new Date(Date.now()+28800000)});
+        setloading(false);
         toast.success(`Login Sucessfully to ${result.user.email}`); 
         navigate('/'); 
       

@@ -42,12 +42,10 @@ function OtherSectionForm({setDisabled,sectionId}) {
             >
                  Add Section<PlusIcon/>
             </button>
-            <button className='bg-[#440CCC] text-white border-[#440CCC] mt-5 rounded-md py-2 px-5 hover:py-3 hover:px-6 hover:shadow-md transition-all cursor-pointer'>
-                 Download
-            </button>
+      
           </div> :
           <div className='col-span-2'>
-            <SectionForm sectionId={sectionId}/>
+            <SectionForm setDisabled={setDisabled} sectionId={sectionId}/>
           </div>
       }
     </div>

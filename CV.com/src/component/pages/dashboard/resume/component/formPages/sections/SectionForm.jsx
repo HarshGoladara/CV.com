@@ -3,7 +3,6 @@ import { InputBase } from '@mui/material'
 import { 
   BtnBold,
   BtnBulletList,
-  BtnClearFormatting,
   BtnItalic,
   BtnLink,
   BtnNumberedList,
@@ -12,7 +11,6 @@ import {
   BtnStyles,
   BtnUnderline,
   BtnUndo,
-  HtmlButton,
   Separator,
   Editor,
   EditorProvider,
@@ -25,13 +23,14 @@ import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 
 
-function SectionForm({sectionId}) {
+function SectionForm({setDisabled,sectionId}) {
   const [value, setValue] = useState('');
   const [loading,setLoading] =useState(false);
   const name = `section_${sectionId}`;
   const {resumeInfo,setResumeInfo} = useContext(ResumeInfoContext);
 
   function onChange(e) {
+    setDisabled(true);
     setValue(e.target.value);
     setResumeInfo({
       ...resumeInfo,
@@ -47,7 +46,7 @@ function SectionForm({sectionId}) {
   }
 
   const titleChangehandle = (event)=>{
-    // setDisabled(true);
+    setDisabled(true);
     const {name1,value} =event.target;
     setResumeInfo({
       ...resumeInfo,
@@ -60,20 +59,6 @@ function SectionForm({sectionId}) {
       }
     })
   }
-
-  // useEffect(()=>{
-  //   setResumeInfo({
-  //     ...resumeInfo,
-  //     Sections:{
-  //       ...resumeInfo.Sections,
-  //       [name] : {
-  //         ...resumeInfo.Sections[name],
-  //         content : value
-  //       }
-  //     }
-  //   });
-  //   console.log(resumeInfo);
-  // },[value])
 
   const onSave = async(event)=>{
     event.preventDefault();

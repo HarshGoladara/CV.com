@@ -1,4 +1,7 @@
 import React from 'react'
+import '../../../../../styledComponent/sectionpreview.css'
+import parse from 'html-react-parser'
+
 
 function SectionPreview({object_key,resumeInfo}) {
   const section =resumeInfo.Sections[object_key];
@@ -6,13 +9,16 @@ function SectionPreview({object_key,resumeInfo}) {
   return (
     <React.Fragment>
       {available ? 
-        <div className='mt-5'>
+        <div className='mt-5 list-disc'>
         <div className='title text-lg font-bold'>
               {section?.title}
         </div>
-        <div dangerouslySetInnerHTML={{__html : section?.content}}>
-
+        <div >
+          {parse(`${section?.content}`)}
         </div>
+        {/* <div>
+          <Temp content={section?.content}/>
+        </div> */}
     </div> : null  
     }
     </React.Fragment>

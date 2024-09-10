@@ -14,7 +14,6 @@ function FormSection() {
     const {resumeInfo,setResumeInfo} = useContext(ResumeInfoContext);
     const sections = resumeInfo.Sections;
     const key_sections = Object.keys(sections);
-    console.log(key_sections);
 
 
   return (
@@ -40,7 +39,7 @@ function FormSection() {
                         : 
                         <div></div>
                 }
-                <button className='bg-[#440CCC] text-white border-[#440CCC]  rounded-md py-2 px-3 hover:py-3 hover:px-4 hover:shadow-md transition-all cursor-pointer disabled:bg-blue-300'
+                <button disabled={disabled} className='bg-[#440CCC] text-white border-[#440CCC]  rounded-md py-2 px-3 hover:py-3 hover:px-4 hover:shadow-md transition-all cursor-pointer disabled:bg-blue-300'
                     onClick={()=>{
                         setDisabled(true);
                         if(id<3){
@@ -51,7 +50,6 @@ function FormSection() {
                             while(flag){
                                 if(key_sections.length===sectionId+add){break;}
                                 const enable = resumeInfo.Sections[key_sections[sectionId+add]].enable
-                                console.log(resumeInfo.Sections[key_sections[sectionId+add]])
                                 if(enable){
                                     flag=false;
                                 }else{

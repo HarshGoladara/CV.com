@@ -17,10 +17,12 @@ export const comparePassword = async(password,hasedPassword)=>{
     }
 }
 
-export const validPassword  = (password)=>{
+export const validPassword  = ( )=>{
     const hasLowercase = /[a-z]/.test(password);
     const hasUppercase = /[A-Z]/.test(password);
     const hasNumbers = /\d/.test(password);  // \d is equivalent to [0-9]
     
     return hasLowercase && hasUppercase && hasNumbers;
 }
+
+

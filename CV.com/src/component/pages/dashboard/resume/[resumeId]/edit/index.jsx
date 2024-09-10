@@ -21,7 +21,6 @@ function EditResume() {
             resumeID : params.resumeId
           }
         });
-        console.log(res.data);
         setResumeInfo(res.data);
         setLoading(false);
       }
